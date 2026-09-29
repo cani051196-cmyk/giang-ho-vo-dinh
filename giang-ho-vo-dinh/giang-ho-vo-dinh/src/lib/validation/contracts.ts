@@ -1,0 +1,6 @@
+import { z } from 'zod';
+
+export const actionTypeSchema=z.enum(['ATTACK','DEFEND','DODGE','COUNTER','FEINT','FEINT_ATTACK','MOVE','USE_SKILL','USE_ITEM','FLEE','SURRENDER','TALK','OBSERVE']);
+export const actionRequestSchema=z.object({ schema_version:z.literal('1.0'), action_id:z.string().min(1), actor_id:z.string().min(1), action_type:actionTypeSchema, target_id:z.string().optional(), parameters:z.record(z.string(),z.unknown()).optional(), source:z.enum(['NATURAL_LANGUAGE','QUICK_ACTION']) }).strict();
+export const engineResultSchema=z.object({ schema_version:z.literal('1.0'), action_id:z.string(), status:z.enum(['ACCEPTED','REJECTED']), outcome:z.string().optional(), time_elapsed_seconds:z.number().nonnegative(), state_changes:z.array(z.unknown()), events:z.array(z.unknown()), narration_hints:z.array(z.string()), error_code:z.string().optional(), error_message:z.string().optional() }).strict();
+export const intentParserOutputSchema=z.object({ schema_version:z.literal('1.0'), intent_status:z.enum(['EXACT','PARTIAL','IMPLIED','AMBIGUOUS','IMPOSSIBLE','UNKNOWN']), action_type:actionTypeSchema.optional(), target_id:z.string().optional(), parameters:z.record(z.string(),z.unknown()).optional(), confidence:z.number().min(0).max(1) }).strict();

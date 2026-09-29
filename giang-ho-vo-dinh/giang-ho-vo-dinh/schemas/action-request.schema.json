@@ -1,0 +1,11 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://giang-ho-vo-dinh.local/schemas/action-request.schema.json",
+  "type":"object","additionalProperties":false,
+  "required":["schema_version","action_id","actor_id","action_type","source"],
+  "properties":{
+    "schema_version":{"const":"1.0"},"action_id":{"type":"string","minLength":1},"actor_id":{"type":"string","minLength":1},
+    "action_type":{"type":"string","enum":["ATTACK","DEFEND","DODGE","COUNTER","FEINT","FEINT_ATTACK","MOVE","USE_SKILL","USE_ITEM","FLEE","SURRENDER","TALK","OBSERVE"]},
+    "target_id":{"type":"string"},"parameters":{"type":"object","additionalProperties":true},"source":{"type":"string","enum":["NATURAL_LANGUAGE","QUICK_ACTION"]}
+  }
+}

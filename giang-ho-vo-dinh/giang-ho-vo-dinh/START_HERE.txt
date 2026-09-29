@@ -1,0 +1,12 @@
+GIANG HỒ VÔ ĐỊNH — CÁCH DÙNG SAU KHI DEPLOY
+
+1) MỞ 1 ĐỊA CHỈ WEB HTTPS
+2) CHƠI
+3) TRÊN ĐIỆN THOẠI: Thêm vào màn hình chính
+4) MUỐN SỬA GAME: thêm /admin vào cùng địa chỉ
+
+Ví dụ:
+https://ten-game.vercel.app
+https://ten-game.vercel.app/admin
+
+Không cần Node.js/Docker cho người chơi sau khi website đã được deploy.

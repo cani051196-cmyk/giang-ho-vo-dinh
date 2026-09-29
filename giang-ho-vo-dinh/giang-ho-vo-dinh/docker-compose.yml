@@ -1,0 +1,53 @@
+services:
+  db:
+    image: pgvector/pgvector:pg17
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: giang_ho_vo_dinh
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ghvd-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d giang_ho_vo_dinh"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  db-init:
+    image: postgres:17-alpine
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      PGPASSWORD: postgres
+    volumes:
+      - ./migrations:/migrations:ro
+    entrypoint: ["sh", "-c"]
+    command: >-
+      "psql -h db -U postgres -d giang_ho_vo_dinh -v ON_ERROR_STOP=1
+      -f /migrations/0001_initial.sql
+      && psql -h db -U postgres -d giang_ho_vo_dinh -v ON_ERROR_STOP=1
+      -f /migrations/0002_memory_vector.sql"
+    restart: "no"
+
+  app:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      db-init:
+        condition: service_completed_successfully
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@db:5432/giang_ho_vo_dinh
+      DEBUG_MODE: "false"
+      AI_PARSER_ENABLED: "false"
+      AI_NARRATION_ENABLED: "false"
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?Set ADMIN_PASSWORD in .env}
+      ADMIN_SESSION_SECRET: ${ADMIN_SESSION_SECRET:?Set ADMIN_SESSION_SECRET in .env}
+    ports:
+      - "3000:3000"
+
+volumes:
+  ghvd-db:

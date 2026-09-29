@@ -1,0 +1,6 @@
+{
+  "framework": "sveltekit",
+  "buildCommand": "npm run db:migrate && npm run build",
+  "installCommand": "npm install",
+  "devCommand": "npm run dev"
+}

@@ -1,0 +1,44 @@
+{
+  "name": "giang-ho-vo-dinh",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio",
+    "start": "node build/index.js",
+    "deploy:check": "npm run check && npm test && npm run build"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "@sveltejs/adapter-node": "5.5.7",
+    "@sveltejs/kit": "2.70.3",
+    "@sveltejs/vite-plugin-svelte": "7.3.1",
+    "svelte": "5.57.1",
+    "svelte-check": "4.7.6",
+    "typescript": "5.8.3",
+    "vite": "7.3.6",
+    "vitest": "5.0.2",
+    "@types/node": "26.6.3",
+    "@sveltejs/adapter-vercel": "6.3.4"
+  },
+  "dependencies": {
+    "ai": "7.0.118",
+    "dexie": "4.4.6",
+    "drizzle-orm": "0.45.3",
+    "pg": "8.23.0",
+    "zod": "4.6.5"
+  },
+  "engines": {
+    "node": ">=24 <25"
+  }
+}

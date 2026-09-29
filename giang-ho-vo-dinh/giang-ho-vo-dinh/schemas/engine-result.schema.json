@@ -1,0 +1,7 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://giang-ho-vo-dinh.local/schemas/engine-result.schema.json",
+  "type":"object","additionalProperties":false,
+  "required":["schema_version","action_id","status","time_elapsed_seconds","state_changes","events","narration_hints"],
+  "properties":{"schema_version":{"const":"1.0"},"action_id":{"type":"string"},"status":{"enum":["ACCEPTED","REJECTED"]},"outcome":{"type":"string"},"time_elapsed_seconds":{"type":"number","minimum":0},"state_changes":{"type":"array"},"events":{"type":"array"},"narration_hints":{"type":"array","items":{"type":"string"}},"error_code":{"type":"string"},"error_message":{"type":"string"}}
+}
